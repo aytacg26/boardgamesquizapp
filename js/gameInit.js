@@ -1,14 +1,20 @@
 import { fetchQuestions } from './utils/quizData.js';
 import { setAlert } from './utils/alert.js';
 import { QuestionsPage } from './questionWindows/Constants.js';
+import { isValidName } from './utils/validateName.js';
 
 //Game Initializer function
 export const initializeGame = async () => {
   const initPage = document.querySelector('.init-presentation');
   const entryPage = document.querySelector('.entery-container');
   const playerName = document.querySelector('.game-input').value;
+  const validNameLength = 25;
+  const { hasSpecialChars, hasValidLength } = isValidName(
+    playerName,
+    validNameLength
+  );
 
-  if (playerName) {
+  if (playerName && !hasSpecialChars && hasValidLength) {
     localStorage.setItem('player', playerName);
     //close entery page
     entryPage.classList.add('completed');
@@ -25,12 +31,28 @@ export const initializeGame = async () => {
       gameInit(title, description, 3);
     }
   } else {
-    //If user does not enter his/her name and clicks start or enter, this message will be fired.
-    setAlert(
-      'We will be happy to have your name before starting the game...',
-      'Name Error!',
-      'danger'
-    );
+    if (!hasValidLength) {
+      setAlert(
+        `Name must contain at most ${validNameLength} characters`,
+        'Not acceptable name length',
+        'danger'
+      );
+      return;
+    } else if (hasSpecialChars) {
+      setAlert(
+        'For name please do not use special characters, you may enter a nickname with letters and numbers',
+        'Not valid name',
+        'danger'
+      );
+      return;
+    } else {
+      //If user does not enter his/her name and clicks start or enter, this message will be fired.
+      setAlert(
+        'We will be happy to have your name before starting the game...',
+        'Name Error!',
+        'danger'
+      );
+    }
   }
 };
 
