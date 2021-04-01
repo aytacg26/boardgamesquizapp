@@ -1,12 +1,1 @@
-Hi Aytac, 
-It was a real pleasure meeting you.  
-As already mentioned in our meeting today, as part of our interview process, we would like you to complete an exercise for us. Your task is to create a quiz page, that will prompt questions to the user sequentially. At the end of the quiz, the score should be displayed, along with a message. Please note that we would like the implementation to be in vanilla javascript with no frameworks used. 
-Upon the page-load you need to display the first question title, image and possible answers. When the user is done answering and chooses to continue with the next question, the answer should be validated and the validation result should be displayed for 3 seconds before moving on to the next question. If the answer was wrong, the correct answer should be highlighted. Complete quiz info is available in the quiz.json file provided which you will need to get via an Ajax call. 
-At the end of the quiz the result should be displayed as a percentage taking into account the points awarded in each question. Questions that require more than one answer should only be counted as correct if all (and only) correct answers are selected. To get the final score message based on the percentage score you will need to use the file result.json provided. 
-quiz.json and result.json are available in the following URLs:
-https://proto.io/en/jobs/candidate-exercise/quiz.json
-https://proto.io/en/jobs/candidate-exercise/result.json
-
-The deadline for submitting the quiz is in two weeks from today.
-Please reply to confirm your availability to complete the assignment. We will be happy to answer any questions you may have. 
-
+Removed
