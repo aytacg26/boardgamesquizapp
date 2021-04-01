@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Aytaç Güley" />
+    <meta
+      name="description"
+      content="Are you a board game boss? Get ready to roll the dice and prove your prowess with this fun quiz on classic board games!"
+    />
+    <meta
+      name="keywords"
+      content="boardgames, classic boardgames, boardgames quiz"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shotcut icon"
+      href="./images/classicboardgames.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+    <title>Board Games Quiz</title>
+  </head>
+  <body>
+    <!--Initial Presentation-->
+    <div class="init-presentation completed">
+      <div class="header">
+        <img
+          src="./images/classicboardgames.png"
+          alt="Classic Board Games"
+          title="Classic Board Games"
+        />
+        <h1 class="title">
+          <span id="title-1"></span>
+          <span id="title-2"></span>
+        </h1>
+      </div>
+      <div class="container">
+        <!-- <div class="page-transition completed">Loading...</div> -->
+        <div class="player"></div>
+        <div class="question-section"></div>
+        <div class="get-ready"></div>
+        <div class="count-down"></div>
+      </div>
+    </div>
+    <!--End of Initial Presentation-->
+
+    <!--Game Entery Form-->
+    <div class="entery-container">
+      <div class="animating-logo">
+        <img
+          src="images/classicboardgames.png"
+          alt="Classic Board Games"
+          title="Classic Board Games"
+        />
+      </div>
+      <p>Welcome to Classic Board Games Quiz</p>
+      <div>
+        <form class="entery-form">
+          <input
+            type="text"
+            name="playername"
+            placeholder="Please enter your name..."
+            class="game-input"
+            autocomplete="off"
+          />
+          <button type="button" class="game-button">Start Game</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./js/boardgames.js"></script>
+  </body>
+</html>

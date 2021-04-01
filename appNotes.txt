@@ -1,0 +1,41 @@
+Author : Aytaç Güley
+Nicosia, Cyprus
+
+Note : 
+> File Minifactions has not be done for the ease of control process and to keep the number of files less, this is not a fully production ready application. 
+
+> Coding has been done on Microsoft VS Code, no framework or css styling package/framework (Bootstrap or MaterializeCSS) has been used. 
+
+> ReactJS style tried to be applied on the element creation by using createElement function located in js/utils folder. 
+
+> Data fetching has been done with Fetch API, the quizData.js file located in js/utils contains two functions (one for fetching questions (fetchQuestions()) and 
+one for fetching results (fetchResults())). 
+
+> App has been created by mostly Vanilla JavaScript and ES6
+
+Files and Functions in Utils Folder :
+
+alert.js => setAlert() function : it has been created and used for alert message boxes
+
+calculateTotalPoints.js => calculateTotalPoints() : it calculates total points of questions (not the points of player)
+
+clearLocalStorage.js => clearLocalStorage() : In app, playername, number of questions, points of player and current question number is
+                                            stored in localStorage and in case a player closes the browser or refreshes it, s/he will 
+                                            be able to continue on the last question s/he was. After completion of the game, on restart
+                                            button, this function is used. On the other hand, if user deletes any of the data on localStorage
+                                            (name or Number of questions etc.) the game will restart automatically and in this process, this function
+                                            is also again used.
+
+createElement.js => instead of using document.createElement, el.appendChild, el.classList.add(className) in every creation of elements, this
+                    function has been created and for Question Windows and Game Results window, this function is used and created elements
+                    are injected to the div#root in question_page.html (located in html folder). In fact, this app would be done as SPA but
+                    to also show element selections or getting element processes, index page has been created in normal way (Html + JS) and
+                    question windows/results have been totally created by JavaScript createElement processes.
+
+generateMessage.js => generateMessage() function generates random correct answer and wrong answer messages for alertbox. Static messages has been added
+                      to file and with the help of Math.random, message is selected on correct answer messages array or wrong answer messages array
+
+getQuestionById.js => In every click to the Next button on question window, currentQuestion id is increaed by one and this function filters the Next
+                      question from fetched json and sends it to the question window generator function
+
+

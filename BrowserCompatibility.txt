@@ -1,0 +1,23 @@
+App tested and it works on the following browser versions :
+
+1- Google Chrome (Version 89.0.4389.114 (Official Build) (64-bit))
+2- Firefox (Version 86.0.1)
+3- Microsoft Edge (Version 89.0.774.63 (Official build) (64-bit))
+4- Opera (Version 74.0.3911.232)
+
+
+On Google Chrome, it has been tested on the following window sizes :
+Desktop 940x700
+Desktop 1360x768
+Desktop 1600x1200
+Desktop 1680x1050
+Desktop 1920x1080
+Desktop 2560x1080
+
+Mobile Galaxy Note 3 360x640
+Mobile Galaxy Note II 360x640
+Mobile Galaxy S III 360x640
+Mobile iPhone5/SE 320x568
+Mobile iPhone 6/7/8 375x667
+Mobile iPhone 6/7/8 Plus 414x736
+
