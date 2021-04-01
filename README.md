@@ -62,3 +62,8 @@ to file and with the help of Math.random, message is selected on correct answer 
 
 **getQuestionById.js** => In every click to the Next button on question window, currentQuestion id is increaed by one and this function filters the Next
 question from fetched json and sends it to the question window generator function
+
+**highLight.js** => Gets the elements by their Id on correct answer array and adds new class to them
+
+**statDataSelector.js** => This function takes results data and point statistics of the user and filters the result data according to
+the total point % of the user.
