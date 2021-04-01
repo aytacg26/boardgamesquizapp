@@ -16,7 +16,7 @@ export const pointStatCalculator = (points, totalPoints, numberOfQuestions) => {
       0
     );
 
-    const totalPoint = (100 * playerPointTotal) / totalPoints;
+    const totalPoint = ((100 * playerPointTotal) / totalPoints).toFixed(2);
 
     return { correct, wrong, totalPoint };
   }
