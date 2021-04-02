@@ -7,7 +7,8 @@ import { isValidName } from './utils/validateName.js';
 export const initializeGame = async () => {
   const initPage = document.querySelector('.init-presentation');
   const entryPage = document.querySelector('.entery-container');
-  const playerName = document.querySelector('.game-input').value;
+  const inputEl = document.querySelector('.game-input');
+  const playerName = inputEl.value;
   const validNameLength = 25;
   const { hasSpecialChars, hasValidLength } = isValidName(
     playerName,
@@ -37,14 +38,14 @@ export const initializeGame = async () => {
         'Not acceptable name length',
         'danger'
       );
-      return;
     } else if (hasSpecialChars) {
       setAlert(
         'For name please do not use special characters, you may enter a nickname with letters and numbers',
         'Not valid name',
         'danger'
       );
-      return;
+      inputEl.value = '';
+      inputEl.focus();
     } else {
       //If user does not enter his/her name and clicks start or enter, this message will be fired.
       setAlert(
