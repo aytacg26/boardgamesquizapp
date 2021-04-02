@@ -1,3 +1,9 @@
+/**
+ * This function checks if the given value contains special characters (!@#$%^&*()/+=~€£;_,.?":{}|<>)
+ * In app, this is used to check entered name and also
+ * @param {Array || String || Object} value - the value which we would like to check if it contains special characters (!@#$%^&*()/+=~€£;_,.?":{}|<>)
+ * @returns Object with hasSpecialChars key and Boolean value (true if value has special character else false)
+ */
 export const checkSpecialCharacters = (value) => {
   const specialChars = /[!@#$%^&*()/+=~€£;_,.?":{}|<>]/g;
   let hasSpecialChars = true;
