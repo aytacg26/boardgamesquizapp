@@ -9,6 +9,8 @@ import {
   TrueFalse,
 } from './Constants.js';
 import { setAlert } from '../utils/alert.js';
+import { checkSpecialCharacters } from '../utils/checkSpecialCharacters.js';
+import { clearLocalStorage } from '../utils/clearLocalStoreage.js';
 
 /**
  *
@@ -50,6 +52,18 @@ export const questionWindowGen = (questionData, func = null) => {
   };
 
   const handleClick = (e) => {
+    //In here, for now we will have two types string or array, any changed value on DOM, will not change the type
+    //because of the structure of getAnswer function, if checkSpecialCharacters return true,
+    //It means user changed any value on DOM with the help of DevTools of browser or try to inject any value to
+    //input value.
+    //We will clear the localStorage and send the user to the start page.
+    const { hasSpecialChars } = checkSpecialCharacters(playerAnswer);
+
+    if (hasSpecialChars) {
+      clearLocalStorage(true, '/html/domManipulation.html');
+      return;
+    }
+
     const isCorrect = validateAnswer(playerAnswer, correct_answer);
     const answerArray = Array.isArray(correct_answer)
       ? correct_answer
