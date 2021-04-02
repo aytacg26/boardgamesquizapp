@@ -77,6 +77,7 @@ const gameInit = (
   const getReady = document.querySelector('.get-ready');
   const countDown = document.querySelector('.count-down');
   const playerName = document.querySelector('.player');
+
   const name = localStorage.player;
 
   playerName.innerText = `Hi, ${name}`;
@@ -101,13 +102,21 @@ const gameInit = (
  */
 const countDownFunc = (countVal, targetElement, targetPage = QuestionsPage) => {
   countVal++;
+  const countDownSound = document.querySelector('#countdown-sound');
   const count = setInterval(() => {
     countVal--;
     if (countVal === 0) {
       clearInterval(count);
-      window.location.replace(targetPage);
+      const redirect = setTimeout(() => {
+        window.location.replace(targetPage);
+        clearTimeout(redirect);
+      }, 1100);
     }
 
     targetElement.innerText = countVal;
   }, 1000);
+  const startSound = setTimeout(() => {
+    countDownSound.play();
+    clearTimeout(startSound);
+  }, 800);
 };

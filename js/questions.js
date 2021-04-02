@@ -10,6 +10,15 @@ import { statDataSelector } from './utils/statDataSelector.js';
 import { getQuestionById } from './utils/getQuestionById.js';
 import { calculateTotalPoints } from './utils/calculateTotalPoints.js';
 
+/**
+ * @TODO : Add lazy loading for StatWin, statDataSelector, calculateTotalPoints and pointStatCalculator functions,
+ * they will be required after 8th question, hence for async lateness, in 7th question they must be imported and ready to use.
+ *
+ * @TODO : Add PWA to the app
+ *
+ * @TODO : Add sound effect to correct and wrong answers.
+ */
+
 window.onload = async () => {
   //Add title to document with the name of player
   document.title = `${localStorage.player} | Board Games Quiz`;
@@ -50,7 +59,10 @@ window.onload = async () => {
   //This function is a prop of questionWindowGen (window generator component and gets data from the window generator component in every Next Button Click)
   const getAnswerResult = (data) => {
     const { point, correctAnswer, playerAnswerArray } = data;
-
+    const correctSound = document.querySelector('#correctSound');
+    const wrongSound = document.querySelector('#wrongSound');
+    const applause = document.querySelector('#applause');
+    const failure = document.querySelector('#failure');
     playerPoints.push({ question: currentQuestion, point });
     localStorage.setItem('points', JSON.stringify(playerPoints));
 
@@ -60,11 +72,13 @@ window.onload = async () => {
       const message = generateMessage(localStorage.player);
       setAlert(message, 'Excellent');
       highLight(correctAnswer, 'correct');
+      correctSound.play();
     } else {
       const message = generateMessage(null, false);
       setAlert(message, 'Not Correct! Answer highlighted in Green!', 'danger');
       highLight(correctAnswer, 'correct');
       highLight(playerAnswerArray, 'wrong');
+      wrongSound.play();
     }
 
     currentQuestion++;
@@ -94,10 +108,20 @@ window.onload = async () => {
 
           if (results) {
             const statData = statDataSelector(results, statResults);
+            console.log(statResults.totalPoint);
             const statWin = StatWin(statData, localStorage.player, statResults);
             targetSection.innerHTML = '';
             targetSection.classList.remove('expand');
             targetSection.appendChild(statWin);
+
+            const resultReact = setTimeout(() => {
+              if (parseInt(statResults.totalPoint) >= 50) {
+                applause.play();
+              } else {
+                failure.play();
+              }
+              clearTimeout(resultReact);
+            }, 1000);
           }
         } catch (error) {
           setAlert(
