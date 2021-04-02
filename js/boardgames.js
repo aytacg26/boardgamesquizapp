@@ -13,6 +13,7 @@ window.onload = () => {
   const numOfQuestions = localStorage.getItem('NumOfQuestions');
   const btn = document.querySelector('.game-button');
   const form = document.querySelector('.entery-form');
+  const btnClick = document.querySelector('#buttonClicked');
 
   //if it is a saved player, we do not need to start him/her from the inital page and forwards him/her to
   //the quiz and starts the quiz from the last question s/he left.
@@ -29,11 +30,15 @@ window.onload = () => {
   }
 
   //Get Player Name
-  btn.addEventListener('click', initializeGame);
+  btn.addEventListener('click', () => {
+    btnClick.play();
+    initializeGame();
+  });
 
   //On Enter press, this will initialize the game.
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    btnClick.play();
     initializeGame();
   });
 };
