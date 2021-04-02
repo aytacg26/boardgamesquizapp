@@ -7,12 +7,8 @@ import { clearLocalStorage } from './utils/clearLocalStoreage.js';
 import { getQuestionById } from './utils/getQuestionById.js';
 
 /**
- * @TODO : Add lazy loading for StatWin, statDataSelector, calculateTotalPoints and pointStatCalculator functions,
- * they will be required after 8th question, hence for async lateness, in 7th question they must be imported and ready to use.
- *
  * @TODO : Add PWA to the app
- *
- *
+ * @TODO : Create Database for app and add more questions, each time 10 random questions will be fetched from database
  */
 
 window.onload = async () => {
