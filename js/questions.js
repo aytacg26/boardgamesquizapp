@@ -4,11 +4,7 @@ import { highLight } from './utils/highLight.js';
 import { setAlert } from './utils/alert.js';
 import { generateMessage } from './utils/generateMessage.js';
 import { clearLocalStorage } from './utils/clearLocalStoreage.js';
-import { pointStatCalculator } from './utils/pointStatCalculator.js';
-import { StatWin } from './statisticsWindow/statWin.js';
-import { statDataSelector } from './utils/statDataSelector.js';
 import { getQuestionById } from './utils/getQuestionById.js';
-import { calculateTotalPoints } from './utils/calculateTotalPoints.js';
 
 /**
  * @TODO : Add lazy loading for StatWin, statDataSelector, calculateTotalPoints and pointStatCalculator functions,
@@ -16,7 +12,7 @@ import { calculateTotalPoints } from './utils/calculateTotalPoints.js';
  *
  * @TODO : Add PWA to the app
  *
- * @TODO : Add sound effect to correct and wrong answers.
+ *
  */
 
 window.onload = async () => {
@@ -51,9 +47,8 @@ window.onload = async () => {
 
   //Fetching question process will only take place here and after each Next Button Click
   //this function won't be called.
-  const res = await fetchQuestions(parseInt(currentQuestion));
-  let questions = getQuestionById(res, parseInt(currentQuestion));
-  const totalPoints = calculateTotalPoints(res);
+  const allQuestions = await fetchQuestions(parseInt(currentQuestion));
+  let questions = getQuestionById(allQuestions, parseInt(currentQuestion));
 
   //When player clicks to next, it will call getAnswerResult
   //This function is a prop of questionWindowGen (window generator component and gets data from the window generator component in every Next Button Click)
@@ -89,7 +84,7 @@ window.onload = async () => {
     //better animation result.
     setTimeout(async () => {
       if (parseInt(currentQuestion) <= parseInt(numberOfQuestions)) {
-        questions = getQuestionById(res, parseInt(currentQuestion));
+        questions = getQuestionById(allQuestions, parseInt(currentQuestion));
 
         targetSection.innerHTML = '';
         const wind = questionWindowGen(questions, getAnswerResult);
@@ -98,31 +93,47 @@ window.onload = async () => {
         //When current question Id reaches to a value greater than total number of questions
         //this part will take place and present the result page to the player.
         try {
-          const res = await fetchResults();
-          const results = res.results;
-          const statResults = pointStatCalculator(
-            playerPoints,
-            totalPoints,
-            numberOfQuestions
-          );
+          //lazy loading added for Results Window Functions
+          import('./statisticsWindow/resultFunctions.js').then(
+            async (module) => {
+              const {
+                calculateTotalPoints,
+                pointStatCalculator,
+                statDataSelector,
+                StatWin,
+              } = module.default;
 
-          if (results) {
-            const statData = statDataSelector(results, statResults);
-            console.log(statResults.totalPoint);
-            const statWin = StatWin(statData, localStorage.player, statResults);
-            targetSection.innerHTML = '';
-            targetSection.classList.remove('expand');
-            targetSection.appendChild(statWin);
+              const res = await fetchResults();
+              const results = res.results;
+              const totalPoints = calculateTotalPoints(allQuestions);
+              const statResults = pointStatCalculator(
+                playerPoints,
+                totalPoints,
+                numberOfQuestions
+              );
 
-            const resultReact = setTimeout(() => {
-              if (parseInt(statResults.totalPoint) >= 50) {
-                applause.play();
-              } else {
-                failure.play();
+              if (results) {
+                const statData = statDataSelector(results, statResults);
+                const statWin = StatWin(
+                  statData,
+                  localStorage.player,
+                  statResults
+                );
+                targetSection.innerHTML = '';
+                targetSection.classList.remove('expand');
+                targetSection.appendChild(statWin);
+
+                const resultReact = setTimeout(() => {
+                  if (parseInt(statResults.totalPoint) >= 50) {
+                    applause.play();
+                  } else {
+                    failure.play();
+                  }
+                  clearTimeout(resultReact);
+                }, 1000);
               }
-              clearTimeout(resultReact);
-            }, 1000);
-          }
+            }
+          );
         } catch (error) {
           setAlert(
             'We are sorry, an unexpected server error occured',
