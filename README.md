@@ -1,5 +1,4 @@
-### Check the app at following link :
-## https://aytacg26.github.io/boardgamesquizapp/
+
 
 ### App tested and it works on the following browser versions :
 
